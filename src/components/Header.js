@@ -22,6 +22,10 @@ const HeaderBar = styled.header`
   background-color: #fff;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
   z-index: 1;
+
+  a {
+    margin-left: 25px;
+  }
 `;
 
 const LogoText = styled.h1`
@@ -55,8 +59,10 @@ const Header = () => {
           </ButtonAsLink>
         ) : (
           <p>
-            <Link to={'/signin'}>Sign In</Link>
-            <Link to={'/signup'}>Sign Up</Link>
+            <p>
+              <Link to={'/signin'}>Sign In</Link>
+              <Link to={'/signup'}>Sign Up</Link>
+            </p>  
           </p>
         )}
       </UserState>

@@ -3,22 +3,22 @@ import { useMutation, useApolloClient, gql } from '@apollo/client';
 
 import UserForm from '../components/UserForm';
 
-const SIGNUP_USER = gql`
-    mutation signUp($email: String!, $username: String!, $password: String!) {
-        signUp(email: $email, username: $username, password: $password)
+const SIGNIN_USER = gql`
+    mutation signUp($email: String!, $password: String!) {
+        signUp(email: $email, password: $password)
     }
 `;
 
-const SignUp = props => {
+const SignIn = props => {
     useEffect(() => {
-        document.title = 'Sign Up - Notedly';
+        document.title = 'Sign In - Notedly';
     });
 
     const client = useApolloClient();
 
-    const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
+    const [signIn, { loading, error }] = useMutation(SIGNUP_USER, {
         onCompleted: data => {
-            localStorage.setItem('token', data.signUp);
+            localStorage.setItem('token', data.signIn);
             client.writeData({ data: { isLoggedIn: true }});
             props.history.push('/');
         }
@@ -26,11 +26,11 @@ const SignUp = props => {
 
     return (
         <React.Fragment>
-            <UserForm action={signUp} formType="signup" />
+            <UserForm action={signIn} formType="signIn" />
             {loading && <p>Loading...</p>}
-            {error && <p>Error creating an account!</p>}
+            {error && <p>Error signin in!</p>}
         </React.Fragment>
     );
 };
 
-export default SignUp;
+export default SignIn;
