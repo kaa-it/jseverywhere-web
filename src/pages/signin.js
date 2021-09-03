@@ -16,7 +16,7 @@ const SignIn = props => {
 
     const client = useApolloClient();
 
-    const [signIn, { loading, error }] = useMutation(SIGNUP_USER, {
+    const [signIn, { loading, error }] = useMutation(SIGNIN_USER, {
         onCompleted: data => {
             localStorage.setItem('token', data.signIn);
             client.writeData({ data: { isLoggedIn: true }});

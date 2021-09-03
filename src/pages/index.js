@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
 import Layout from '../components/Layout';
+import { IS_LOGGED_IN } from '../gql/query';
 
 import Home from './home';
 import MyNotes from './mynotes';
@@ -10,12 +11,8 @@ import Favorites from './favorites';
 import NotePage from './note';
 import SignUp from './signup';
 import SignIn from './signin';
-
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+import NewNote from './new';
+import EditNote from './edit';
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
   const {loading, error, data} = useQuery(IS_LOGGED_IN);
@@ -57,6 +54,8 @@ const Pages = () => {
         <Route path="/note/:id" component={NotePage} />
         <Route path="/signup" component={SignUp} />
         <Route path="/signin" component={SignIn} />
+        <PrivateRoute path="/new" component={NewNote} />
+        <PrivateRoute path="/edit/:id" component={EditNote} />
       </Layout>
     </Router>
   );

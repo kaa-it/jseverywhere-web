@@ -59,10 +59,8 @@ const Header = () => {
           </ButtonAsLink>
         ) : (
           <p>
-            <p>
               <Link to={'/signin'}>Sign In</Link>
               <Link to={'/signup'}>Sign Up</Link>
-            </p>  
           </p>
         )}
       </UserState>
